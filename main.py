@@ -74,7 +74,7 @@ class Job:
                         elif 2 == task_status:
                             self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): tsk_name.no_check()}
                 db.write_db_task(self.data_json)
-            print(self.data_json)
+
 
     def user_all(self):
         get_db = db.read_db()

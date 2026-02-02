@@ -67,9 +67,9 @@ class DB_connection:
             if old_data.get('id') == user['id'] and user['имя'] == old_data.get('имя'):
                 for i in user['tasks']:
                     if list(i.keys())[0] == list(old_data['tasks'].keys())[0]:
-                        print(list(old_data['tasks'].keys())[0])
+                        # print(list(old_data['tasks'].keys())[0])
                         key_to_remove = list(old_data['tasks'].keys())[0]
-                        print(user['tasks'])
+                        # print(user['tasks'])
                         user['tasks'] = [task for task in user['tasks'] if key_to_remove not in task]
                         print("Задача удалена")
                         break
@@ -86,7 +86,7 @@ class DB_connection:
                     task_key = list(new_data['tasks'].keys())[0]
                     if list(i.keys())[0] == task_key:
                         i[task_key] = new_data['tasks'][task_key]
-                        print(f"Обновлено: {task_key} = {new_data['tasks'][task_key]}")
+                        print(f"Обновлено: Задача {task_key} = {new_data['tasks'][task_key]}")
                         break
         with open(self.db, 'w', encoding='utf-8') as json_file:
             json.dump(existing_data, json_file, ensure_ascii=False, indent=4)
