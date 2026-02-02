@@ -75,13 +75,12 @@ class Job:
                             self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): tsk_name.no_check()}
                 db.write_db_task(self.data_json)
 
-
-    def user_all(self):
+    def get_user_all(self):
         get_db = db.read_db()
-        print('*'*10)
+        print('*' * 10)
         for use_id_name in get_db:
             print(f'Табельный номер: {use_id_name['id']} Имя пользователя: {use_id_name['имя']}')
-        print('*'*10)
+        print('*' * 10)
 
 
 database_path = './data.json'
@@ -171,7 +170,7 @@ if __name__ == '__main__':
                     jod_program.get_tasks()
             elif flag == 8:
                 """Получить список пользователей"""
-                jod_program.user_all()
+                jod_program.get_user_all()
             elif flag == 9:
                 print('Завершение работы программы')
                 break
