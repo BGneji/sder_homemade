@@ -36,8 +36,6 @@ class Job:
                 user_data = input_user()
                 user = User(user_data[0], user_data[1])
                 db.add_user(user.personnel_number, user.name)
-            else:
-                return
 
     def sing_out(self):
         """Выход из аккаунта"""
@@ -46,11 +44,11 @@ class Job:
         self.current_user = False
 
     def add_task(self, tsk_name):
-        self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): 'nNone'}
+        self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): 'None'}
         db.write_db(self.data_json)
 
     def dell_task(self, tsk_name):
-        self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): 'nNone'}
+        self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): 'None'}
         db.dell_task_db(self.data_json)
 
     def get_tasks(self):
@@ -71,7 +69,6 @@ class Job:
             if self.data_json.get('id') == user['id'] and user['имя'] == self.data_json.get('имя'):
                 for task_user in user['tasks']:
                     if tsk_name.name in task_user:
-                        print('ТУТ=1')
                         if 1 == task_status:
                             self.data_json['tasks'] = {str(tsk_name.name).capitalize().strip(): tsk_name.yes_check()}
                         elif 2 == task_status:
@@ -124,15 +121,18 @@ if __name__ == '__main__':
                 jod_program.sing_in(user.personnel_number, user.name)
 
             elif flag == 2:
+                """Выйти из аккаунта"""
                 jod_program.sing_out()
                 print('Вы успешно вышли из аккаунта')
 
             elif flag == 3:
+                """Регистрация"""
                 user_data = input_user()
                 user = User(user_data[0], user_data[1])
                 db.add_user(user.personnel_number, user.name)
 
             elif flag == 4:
+                """Добавить задачу"""
                 if jod_program.current_user is False:
                     add_dell_execute()
                 else:
@@ -143,6 +143,7 @@ if __name__ == '__main__':
                         tsk = Task(name_task)
                         jod_program.add_task(tsk)
             elif flag == 5:
+                """Удалить задачу"""
                 if jod_program.current_user is False:
                     add_dell_execute()
                 else:
@@ -155,25 +156,27 @@ if __name__ == '__main__':
                     add_dell_execute()
                 else:
                     name_task = input('Введите название задачи для изменения статуса: ')
+                    print(
+                        "\n\t1. В работе"
+                        "\n\t2. Выполнена"
+                    )
                     status_task = int(input('Введите статуса задачи: '))
-                    "\n\t1. В работе"
-                    "\n\t2. Выполнена"
-
                     tsk = Task(name_task)
                     jod_program.check_task(tsk, status_task)
-
             elif flag == 7:
+                """Получить список задача"""
                 if jod_program.current_user is False:
                     add_dell_execute()
                 else:
                     jod_program.get_tasks()
             elif flag == 8:
+                """Получить список пользователей"""
                 jod_program.user_all()
             elif flag == 9:
                 print('Завершение работы программы')
                 break
             elif flag == 10:
-
+                """Тест программы"""
                 jod_program.status_current_user()
                 list_db = db.read_db()
                 print()

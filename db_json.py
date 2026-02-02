@@ -25,7 +25,6 @@ class DB_connection:
         for user in existing_data:
             if new_data.get('id') == user['id'] and user['имя'] == new_data.get('имя'):
                 for i in user['tasks']:
-                    print('ТУТ')
                     task_key = list(new_data['tasks'].keys())[0]
                     if list(i.keys())[0] == task_key:
                         print('Такая задача уже есть')
